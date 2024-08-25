@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, Integer
 from sqlalchemy.orm import relationship
-from ..database import Base
+from ..db.database import Base
 
 class Seller(Base):
     __tablename__='seller'
@@ -8,4 +8,5 @@ class Seller(Base):
     username = Column(String)
     email = Column(String)
     password = Column(String)
-    products = relationship('Product', back_populates='seller')
+    # new_type = Column(String)
+    # products = relationship('Product', back_populates='seller')

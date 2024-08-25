@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
+from src.routers.category_router import router as category_router
 from src.routers.products_router import router as product_router
 from src.routers.seller_router import router as seller_router
 from src.routers.login_router import router as login_router
@@ -36,6 +37,7 @@ app.add_middleware(
 app.include_router(product_router, tags=['Product'])
 app.include_router(seller_router, tags=['Seller'])
 app.include_router(login_router, tags=['Login'])
+app.include_router(category_router,tags=['Category'])
 
 @app.get("/")
 def index():

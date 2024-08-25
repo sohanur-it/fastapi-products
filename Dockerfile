@@ -15,10 +15,21 @@ COPY pyproject.toml  poetry.lock* ./
 
 RUN poetry install
 
+# Copy the source code and Alembic files into the container
 COPY src /app/src
+COPY alembic /app/alembic
+COPY alembic.ini /app/alembic.ini
+
+# Copy the migration script into the container
+COPY run_migrations.sh /app/run_migrations.sh
+
+# Make the migration script executable
+RUN chmod +x /app/run_migrations.sh
+
+# Run migrations as part of the build process
+RUN ./run_migrations.sh
 
 EXPOSE 8000
-
 
 
 
