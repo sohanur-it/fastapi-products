@@ -8,6 +8,7 @@ class CategoryCreate(CategoryBase):
     pass
 
 class DisplayCategory(BaseModel):
+    id: int
     name : str
 
     class Config:

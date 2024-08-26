@@ -18,3 +18,15 @@ category_models.Base.metadata.create_all(engine)
 async def category_list(db:Session=Depends(get_db)):
     category = db.query(category_models.Category).all()
     return category
+
+
+@router.post('', status_code=status.HTTP_201_CREATED)
+async def add(category_request: CategoryCreate, db: Session= Depends(get_db)):
+    # category = db.query(category_models.Category).filter(category_models.Category.id == category_request.id).first()
+    # if not category:
+    #     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Category not found")
+    new_category = category_models.Category(**category_request.model_dump())
+    db.add(new_category)
+    db.commit()
+    db.refresh(new_category)
+    return new_category

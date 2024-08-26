@@ -16,7 +16,7 @@ product_models.Base.metadata.create_all(engine)
 
 
 @router.get('', response_model=List[DisplayProduct])
-async def product_list(db:Session=Depends(get_db), current_user: Seller = Depends(get_current_user)):
+async def product_list(db:Session=Depends(get_db)):
     products = db.query(product_models.Product).all()
     return products
 
